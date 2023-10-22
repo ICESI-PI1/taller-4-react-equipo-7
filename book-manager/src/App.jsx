@@ -1,17 +1,17 @@
 import { useState } from 'react'
-import Author from './components/Author'
-import Book from './components/Book'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 
 function App() {
 
+  const book = {"id":2,"title":"El otoño del patriarca","publicationDate":"1975-08-01T00:00:00.000+00:00","author":{"id":1,"name":"Leonardo da Vinci","nationality":"Italiano"}};
+
+
   return (
     <>
-      <h1>Libros</h1>
-      <Book id="1" title="El señor de los anillos" author="J.R.R. Tolkien" date="1954" />      
-      
+     
+         
     </>    
   )
 }
