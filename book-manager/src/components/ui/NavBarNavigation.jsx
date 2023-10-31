@@ -4,10 +4,26 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 
 
 
 function NavBarNavigation() {
+
+  const [token, setToken] = useState(null);
+
+  useEffect(() => {
+    const storedToken = localStorage.getItem('token');
+    if (storedToken) {
+      setToken(storedToken);
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setToken(null);
+  };
+
 
   const buttonStyle = {
     background: 'transparent',
@@ -46,17 +62,23 @@ function NavBarNavigation() {
             </NavDropdown>
           </Nav>
           <Nav>
-            <Nav>
-              <Link to="/login">
-                <Button variant="outline-primary">Iniciar Sesión</Button>
-              </Link>
-              <Link to="/register">
-                <Button variant="primary" className="ms-2">
-                  Registrarse
-                </Button>
-              </Link>
-            </Nav>
-          </Nav>
+      {token ? ( // Si hay un token
+        <Button variant="danger" onClick={handleLogout}>
+          Cerrar Sesión
+        </Button>
+      ) : ( // Si no hay un token
+        <>
+          <Link to="/login">
+            <Button variant="outline-primary">Iniciar Sesión</Button>
+          </Link>
+          <Link to="/register">
+            <Button variant="primary" className="ms-2">
+              Registrarse
+            </Button>
+          </Link>
+        </>
+      )}
+    </Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>
