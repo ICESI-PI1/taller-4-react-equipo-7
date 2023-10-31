@@ -12,7 +12,6 @@ function BookTable(props) {
 
   const navigate = useNavigate();
 
-  const { id } = useParams();
 
 
 

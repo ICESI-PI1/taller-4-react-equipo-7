@@ -32,7 +32,15 @@ export default function App() {
           path="/books/create"
           element={
             <RouteGuard>
-              <BookForm />
+              <BookForm isEdit={false} />
+            </RouteGuard>
+          }
+        />
+        <Route
+          path="/books/edit/:id"
+          element={
+            <RouteGuard>
+              <BookForm isEdit={true} />
             </RouteGuard>
           }
         />

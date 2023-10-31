@@ -42,22 +42,29 @@ function NavBarNavigation() {
             <Nav.Link href="/">Home</Nav.Link>
             <NavDropdown title="Autores" id="basic-nav-dropdown">
 
-              <NavDropdown.Item href="authors/create">
+              <NavDropdown.Item>
                 <Link to="/authors/create">
                   <Button style={buttonStyle}>Crear</Button>
                 </Link>
 
               </NavDropdown.Item>
-              <NavDropdown.Item href="authors">
+              <NavDropdown.Item >
                 <Link to="/authors">
                   <Button style={buttonStyle}>Listar</Button>
                 </Link>
               </NavDropdown.Item>
             </NavDropdown>
             <NavDropdown title="Libros" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#">Crear</NavDropdown.Item>
-              <NavDropdown.Item href="books">
-                Listar
+
+            <NavDropdown.Item >
+                <Link to="/books/create">
+                  <Button style={buttonStyle}>Crear</Button>
+                </Link>
+              </NavDropdown.Item>
+              <NavDropdown.Item >
+                <Link to="/books">
+                  <Button style={buttonStyle}>Listar</Button>
+                </Link>
               </NavDropdown.Item>
             </NavDropdown>
           </Nav>
