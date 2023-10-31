@@ -18,10 +18,8 @@ export default function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />}></Route>
-
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-
         <Route
           path="/books"
           element={
@@ -30,7 +28,6 @@ export default function App() {
             </RouteGuard>
           }
         />
-
         <Route
           path="/books/create"
           element={
@@ -39,17 +36,22 @@ export default function App() {
             </RouteGuard>
           }
         />
-
-<Route
+        <Route
           path="/authors/create"
           element={
             <RouteGuard>
-              <AuthorForm />
+              <AuthorForm isEdit={false} />
             </RouteGuard>
           }
         />
-
-
+        <Route
+          path="/authors/edit/:id"
+          element={
+            <RouteGuard>
+              <AuthorForm isEdit={true} />
+            </RouteGuard>
+          }
+        />
         <Route
           path="/authors"
           element={

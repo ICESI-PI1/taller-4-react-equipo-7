@@ -12,6 +12,9 @@ function BookTable(props) {
 
   const navigate = useNavigate();
 
+  const { id } = useParams();
+
+
 
   useEffect(() => {
 
@@ -84,6 +87,8 @@ function BookTable(props) {
                 Eliminar
               </Button>
               <span style={{ margin: '0 5px' }}></span>
+              
+
               <Button variant="primary" onClick={() => handleUpdate(item.id)}>
                 Actualizar
               </Button>

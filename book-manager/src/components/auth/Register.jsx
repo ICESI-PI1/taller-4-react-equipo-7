@@ -1,6 +1,7 @@
 import instance from '../../config/noTokenAxios';
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
+import NavBarNavigation from '../ui/NavBarNavigation';
 
 const Register = () => {
     const [firstName, setFirstName] = useState('');
@@ -25,51 +26,55 @@ const Register = () => {
     };
 
     return (
-        <Form onSubmit={handleSubmit}>
-            <Form.Group className="mb-3" controlId="formFirstName">
-                <Form.Label>First Name</Form.Label>
-                <Form.Control
-                    type="text"
-                    placeholder="Enter first name"
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
-                />
-            </Form.Group>
+        <>
+            <NavBarNavigation />
+            <Form onSubmit={handleSubmit}>
+                <Form.Group className="mb-3" controlId="formFirstName">
+                    <Form.Label>Nombre</Form.Label>
+                    <Form.Control
+                        type="text"
+                        placeholder="Enter first name"
+                        value={firstName}
+                        onChange={(e) => setFirstName(e.target.value)}
+                    />
+                </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formLastName">
-                <Form.Label>Last Name</Form.Label>
-                <Form.Control
-                    type="text"
-                    placeholder="Enter last name"
-                    value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
-                />
-            </Form.Group>
+                <Form.Group className="mb-3" controlId="formLastName">
+                    <Form.Label>Apellido</Form.Label>
+                    <Form.Control
+                        type="text"
+                        placeholder="Enter last name"
+                        value={lastName}
+                        onChange={(e) => setLastName(e.target.value)}
+                    />
+                </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formusername">
-                <Form.Label>username address</Form.Label>
-                <Form.Control
-                    type="username"
-                    placeholder="Enter username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                />
-            </Form.Group>
+                <Form.Group className="mb-3" controlId="formusername">
+                    <Form.Label>Correo Electrónico</Form.Label>
+                    <Form.Control
+                        type="username"
+                        placeholder="Enter username"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                    />
+                </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formPassword">
-                <Form.Label>Password</Form.Label>
-                <Form.Control
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-            </Form.Group>
+                <Form.Group className="mb-3" controlId="formPassword">
+                    <Form.Label>Contraseña</Form.Label>
+                    <Form.Control
+                        type="password"
+                        placeholder="Password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                </Form.Group>
 
-            <Button variant="primary" type="submit">
-                Register
-            </Button>
-        </Form>
+                <Button variant="primary" type="submit">
+                    Registrarse
+                </Button>
+            </Form>
+        </>
+
     );
 };
 

@@ -1,6 +1,7 @@
 import instance from '../../config/noTokenAxios';
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
+import NavBarNavigation from '../ui/NavBarNavigation';
 
 const Register = () => {
 
@@ -25,6 +26,8 @@ const Register = () => {
     };
 
     return (
+        <>
+        <NavBarNavigation />
         <Form onSubmit={handleSubmit}>
             
             <Form.Group className="mb-3" controlId="formEmail">
@@ -51,6 +54,8 @@ const Register = () => {
                 Login
             </Button>
         </Form>
+        </>
+        
     );
 };
 

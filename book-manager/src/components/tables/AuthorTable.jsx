@@ -2,10 +2,16 @@ import React, { useState, useEffect } from 'react';
 import Table from 'react-bootstrap/Table';
 import instance from '../../config/tokenAxios';
 import { Button } from 'react-bootstrap';
+import NavBarNavigation from '../ui/NavBarNavigation';
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
+
 
 
 function BookTable(props) {
-    
+
+  const navigate = useNavigate();
 
   const [authors, setAuthors] = useState([]);
 
@@ -32,10 +38,15 @@ function BookTable(props) {
       });
   };
 
+  const handleUpdate = (id) => {
+    navigate(`/authors/edit/${id}`);
+  };
+
 
     return (
         <div>
-            <h2>Lista de autores</h2>
+            <NavBarNavigation />
+            <h2 style={{ marginTop: "25px" }}>Lista de autores</h2>
             <Table striped bordered hover>
             
             <thead>
@@ -57,9 +68,13 @@ function BookTable(props) {
                 Eliminar
               </Button>
               <span style={{ margin: '0 5px' }}></span>
-              <Button variant="primary" onClick={() => handleUpdate(item.id)}>
-                Actualizar
-              </Button>
+
+              <Link to={`/authors/edit/${item.id}`}>
+                <Button variant="primary" >
+                  Actualizar
+                </Button>
+              </Link>
+              
             </td>
             </tr>
           ))}
