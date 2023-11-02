@@ -39,10 +39,11 @@ public class BookManagerRepositoryImpl  implements IBookManagerRepository {
     @Override
     public Book updateBook(Long id, Book updatedBook) {
         Optional<Book> bookToUpdate = books.stream().filter(b -> b.getId().equals(id)).findFirst();
+
         bookToUpdate.ifPresent(book -> {
             book.setTitle(updatedBook.getTitle());
             book.setPublicationDate(updatedBook.getPublicationDate());
-
+            book.setAuthor(updatedBook.getAuthor());
         });
         return bookToUpdate.orElse(null);
     }
@@ -61,6 +62,8 @@ public class BookManagerRepositoryImpl  implements IBookManagerRepository {
     @Override
     public Author updateAuthor(Long id, Author updatedAuthor) {
         Optional<Author> authorToUpdate = authors.stream().filter(a -> a.getId().equals(id)).findFirst();
+
+
         authorToUpdate.ifPresent(author -> {
             author.setName(updatedAuthor.getName());
             author.setNationality(updatedAuthor.getNationality());
