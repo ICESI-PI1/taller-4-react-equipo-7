@@ -14,6 +14,7 @@ const BookForm = ({ isEdit }) => {
     const [selectedAuthorId, setSelectedAuthorId] = useState('');
 
     const handleSelectChange = (event) => {
+        console.log(event.target.value);    
         setSelectedAuthorId(event.target.value);
     };
 
@@ -25,25 +26,45 @@ const BookForm = ({ isEdit }) => {
         author: ''
     });
 
+    
+    const formatDate = (isoDate) => {
+        if (!isoDate) return '';
+        const date = new Date(isoDate);
+        if (isNaN(date)) return ''; 
+        const year = date.getFullYear();
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const day = date.getDate().toString().padStart(2, '0');
+        return `${year}-${month}-${day}`;
+      };
+      
+      
+      
+
     useEffect(() => {
 
         if (isEdit) {
             instance.get(`libros/${id}`)
                 .then(response => {
                     const data = response.data;
-
                     setBookData({
                         id: data.id,
                         title: data.title,
-                        publicationDate: data.publicationDate
+                        publicationDate: formatDate(data.publicationDate)
                     });
-                    console.log(data.author.id);
-                    instance.get(`autores/${data.author.id}}`)
+                    instance.get(`autores`)
                     .then(response => {
-                        const data = response.data;
-                        setBookData({
-                            author:data
+                        setAuthors(response.data);
+                        setSelectedAuthorId(data.author.id);
+                        instance.get(`autores/${data.author.id}`)
+                        .then(response => {
+                            console.log(response.data);
+                            bookData.author = response.data;
+                            console.log(bookData);
+                        })
+                        .catch(err => {
+                            setError('Hubo un error al cargar los datos del autor');
                         });
+
                     })
                     .catch(err => {
                         setError('Hubo un error al cargar los datos del autor');
@@ -81,9 +102,13 @@ const BookForm = ({ isEdit }) => {
 
         if (isEdit) {
 
-            instance.put(`books/${id}`, authorData)
+            instance.get(`/autores/${selectedAuthorId}`)
+            .then((response) => {
+                bookData.author = response.data;
+            })
+            instance.put(`libros/${id}`, bookData)
                 .then((response) => {
-                    window.location.href = '/authors';
+                    window.location.href = '/books';
 
                 })
                 .catch((error) => {
@@ -161,11 +186,14 @@ const BookForm = ({ isEdit }) => {
                     </Form.Select>
                 </Form.Group>
                 <Form.Group className="mb-3">
-                    <Form.Label>Fecha:</Form.Label>
-                    <Form.Control onChange={handleChange}
-                        type="date" name="publicationDate" placeholder="Date of Birth" />
-
-                </Form.Group>
+  <Form.Label>Fecha:</Form.Label>
+  <Form.Control
+    onChange={handleChange}
+    type="date"
+    name="publicationDate"
+    value={bookData.publicationDate} // Formatea la fecha antes de mostrarla
+  />
+</Form.Group>
                 {error && <div className="mb-3" style={{ color: 'red' }}>{error}</div>}
 
                 <Form.Group className="mb-3" controlId="formBasicEmail">

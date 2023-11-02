@@ -25,9 +25,11 @@ const AuthorForm = ({ isEdit }) => {
 
   useEffect(() => {
     if (isEdit) {
+      
       instance.get(`autores/${id}`)
       .then(response => {
         const data = response.data;
+        
         setAuthorData({
           id: data.id,
           name: data.name,
