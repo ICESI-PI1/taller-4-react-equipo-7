@@ -57,9 +57,7 @@ const BookForm = ({ isEdit }) => {
                         setSelectedAuthorId(data.author.id);
                         instance.get(`autores/${data.author.id}`)
                         .then(response => {
-                            console.log(response.data);
                             bookData.author = response.data;
-                            console.log(bookData);
                         })
                         .catch(err => {
                             setError('Hubo un error al cargar los datos del autor');
@@ -102,10 +100,16 @@ const BookForm = ({ isEdit }) => {
 
         if (isEdit) {
 
+
+            console.log(selectedAuthorId)
+
+        
+
             instance.get(`/autores/${selectedAuthorId}`)
             .then((response) => {
                 bookData.author = response.data;
             })
+            console.log(bookData)
             instance.put(`libros/${id}`, bookData)
                 .then((response) => {
                     window.location.href = '/books';
@@ -113,7 +117,7 @@ const BookForm = ({ isEdit }) => {
                 })
                 .catch((error) => {
                     console.error('Error al editar los datos:', error);
-                    setError('No se pudo editar el autor. Inténtalo de nuevo.');
+                    setError('No se pudo editar el libro. Inténtalo de nuevo.');
 
                 });
         } else {
